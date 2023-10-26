@@ -18,7 +18,7 @@ public class LoginServlet extends pagesServlet {
 
     @Override
     public void init() {
-        service = new UserService();
+        service = new UserService(userRepository);
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
@@ -111,7 +111,7 @@ public class LoginServlet extends pagesServlet {
         }
     }
 
-    public  List<String> loginValidation(String email , String password){
+    public boolean loginValidation(String email , String password){
 
         List<String> validationErrors = new ArrayList<>();
 

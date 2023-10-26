@@ -12,7 +12,6 @@ import jakarta.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class EventService {
     private final EventRepository eventRepository;
@@ -31,7 +30,7 @@ public class EventService {
             event.addTicket(ticket);
 
         CategoryService categoryService = new CategoryService();
-        UserService userService = new UserService();
+        UserService userService = new UserService(userRepository);
 
         Category category = categoryService.getById(categoryId);
         User user = userService.getById(organizerId);
@@ -45,7 +44,7 @@ public class EventService {
         for (Ticket ticket : tickets)
             event.addTicket(ticket);
         CategoryService categoryService = new CategoryService();
-        UserService userService = new UserService();
+        UserService userService = new UserService(userRepository);
         Category category = categoryService.getById(categoryId);
         User user = userService.getById(organizerId);
         event.setOrganizer(user);
